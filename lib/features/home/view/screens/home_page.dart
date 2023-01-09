@@ -36,7 +36,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index){
-          //Updates Ui by rebuilding the state when changes are made          setState(()=> _currentIndex = index);
+          //Updates Ui by rebuilding the state when changes are made
+          setState(()=> _currentIndex = index);
         },
         selectedItemColor: Colors.lightBlue,
         unselectedItemColor: Colors.white70,

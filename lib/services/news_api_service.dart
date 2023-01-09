@@ -23,6 +23,8 @@ class NewsApiService{
     //Makes a network request
     http.Response response = await http.get(Uri.parse(fullUrl));
 
+    if(response.statusCode != 200) return  listToBeReturned;
+
     //jsonDecode converts the responseBody which comes
     // as a string into a map object
     Map<String, dynamic> responseBody  = jsonDecode(response.body);

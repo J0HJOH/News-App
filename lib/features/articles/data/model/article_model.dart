@@ -1,4 +1,6 @@
 
+import 'package:intl/intl.dart';
+
 class Article{
 
   String author;
@@ -18,14 +20,15 @@ class Article{
     required this.content});
 
   factory Article.fromJson(Map<String, dynamic>json){
+    DateTime date = DateFormat("yy-MM-ddtHH : mm : ssZ").parse(json["published At"]);
     return Article(
-      author: json["author"],
-      title: json["title"],
-      description: json["description"],
-      url: json["url"],
-      urlToImage: json["urlToImage"],
-      publishedAt: json["publishedAt"],
-      content: json["content"]
+      author: json["author"] ?? "",
+      title: json["title"] ?? "",
+      description: json["description"] ?? "",
+      url: json["url"] ?? "",
+      urlToImage: json["urlToImage"] ?? "",
+      publishedAt: json["${date.year}-${date.month}-${date.day}"] ?? "",
+      content: json["content"] ?? ""
     );
   }
 }
