@@ -21,14 +21,19 @@ class Article{
 
   factory Article.fromJson(Map<String, dynamic>json){
     DateTime date = DateFormat("yy-MM-ddtHH : mm : ssZ").parse(json["published At"]);
+    var dateToBeShown = DateFormat("yyyy-MM-dd  HH:mm").format(date);
+
+    var jsonContent = json["content"] ?? "";
+    List<String> stringList = jsonContent.split("[");
+    var content = jsonContent.replaceAll(stringList.last, "");
     return Article(
       author: json["author"] ?? "",
       title: json["title"] ?? "",
       description: json["description"] ?? "",
       url: json["url"] ?? "",
       urlToImage: json["urlToImage"] ?? "",
-      publishedAt: json["${date.year}-${date.month}-${date.day}"] ?? "",
-      content: json["content"] ?? ""
+      publishedAt: dateToBeShown ?? "", //year-month-day  hour:min
+      content: jsonContent
     );
   }
 }

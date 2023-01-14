@@ -18,10 +18,14 @@ class ArticlesPage extends StatefulWidget {
   @override
   void initState() {
     super.initState();
+
+    //Trigger the load event
     context.read<ArticleBloc>().add(LoadArticle());
   }
     @override
     Widget build(BuildContext context) {
+
+    //Subscribe to the bloc
       var articleBloc = context.watch<ArticleBloc>();
       List<Article> listOfArticles = articleBloc.state.listOfArticles;
 
