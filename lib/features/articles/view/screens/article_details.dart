@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/model/article_model.dart';
+import 'package:share_plus/share_plus.dart';
 import '../widgets/big_post.dart';
 
 class ArticleDetailsPage extends StatefulWidget {
@@ -20,7 +22,10 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: (){},
+              onPressed: () async{
+                await Share
+                    .share("Hi! Checkout this news from NEWS UPDATE APP ${widget.article.url}");
+              },
               icon: FaIcon(FontAwesomeIcons.share)
           )
         ],
@@ -46,13 +51,14 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
             ),
           ),
           MaterialButton(
-              onPressed: (){},
+              onPressed: ()=>readMore(widget.article.url),
             color: Colors.grey[800],
             padding: EdgeInsets.all(8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)
             ),
             elevation: 15,
+            height: 60,
               child: const Text(
                   "Read More....",
                 style: TextStyle(
@@ -63,5 +69,12 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
         ],
       ),
     );
+  }
+
+  ///A method that opens the browser page using the url
+  Future<void> readMore(String url) async {
+    var parsedUrl = Uri.parse(url);
+    await launchUrl(parsedUrl);
+
   }
 }

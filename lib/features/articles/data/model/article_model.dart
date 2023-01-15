@@ -22,10 +22,11 @@ class Article{
   factory Article.fromJson(Map<String, dynamic>json){
     DateTime date = DateFormat("yy-MM-ddtHH : mm : ssZ").parse(json["published At"]);
     var dateToBeShown = DateFormat("yyyy-MM-dd  HH:mm").format(date);
+    String jsonContent = json["content"] ?? "";
 
-    var jsonContent = json["content"] ?? "";
+    //Remove the text showing the remaining content
     List<String> stringList = jsonContent.split("[");
-    var content = jsonContent.replaceAll(stringList.last, "");
+    var content = jsonContent.replaceAll("[${stringList.last}", "");
     return Article(
       author: json["author"] ?? "",
       title: json["title"] ?? "",
